@@ -6,12 +6,12 @@
     </div>
     <!-- 問1 -->
     <p>現在生命保険に加入されていますか？</p>
-    <label for="yes">
-      <input type="radio" value="yes" id="yes" v-model="q1" />
+    <label for="yes1">
+      <input type="radio" value="yes" id="yes1" v-model="q1" />
       はい
     </label>
-    <label for="No">
-      <input type="radio" value="no" id="no" v-model="q1" />
+    <label for="no1">
+      <input type="radio" value="no" id="no1" v-model="q1" />
       いいえ
     </label>
 
@@ -19,12 +19,12 @@
     <p>
       現在入院中ですか。または、最近3ヶ月以内に石の診察・検査の結果、入院・手術をすすめられたことはありますか？
     </p>
-    <label for="yes">
-      <input type="radio" value="yes" id="yes" v-model="q2" />
+    <label for="yes2">
+      <input type="radio" value="yes" id="yes2" v-model="q2" />
       はい
     </label>
-    <label for="No">
-      <input type="radio" value="no" id="no" v-model="q2" />
+    <label for="no2">
+      <input type="radio" value="no" id="no2" v-model="q2" />
       いいえ
     </label>
 
@@ -32,12 +32,12 @@
     <p>
       過去5年以内に、病気やけがで、手術を受けたことまたは継続して7日以上の入院をしてことがありますか？
     </p>
-    <label for="yes">
-      <input type="radio" value="yes" id="yes" v-model="q3" />
+    <label for="yes3">
+      <input type="radio" value="yes" id="yes3" v-model="q3" />
       はい
     </label>
-    <label for="No">
-      <input type="radio" value="no" id="no" v-model="q3" />
+    <label for="no3">
+      <input type="radio" value="no" id="no3" v-model="q3" />
       いいえ
     </label>
 
