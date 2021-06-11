@@ -1,11 +1,10 @@
 <template>
   <div id="app">
     <keep-alive>
-      <Step1 v-if="steps === 1" @firstNext="firstAddInfo"></Step1>
-      <Step2 v-if="steps === 2" @secondNext="secondAddInfo" @prev="prev"></Step2>
-      <Step3 v-if="steps === 3" @thirdNext="thirdAddInfo" @prev="prev"></Step3>
+      <Step1 v-if="steps === 1" @next="next"></Step1>
+      <Step2 v-if="steps === 2" @next="next" @prev="prev"></Step2>
+      <Step3 v-if="steps === 3" @next="next" @prev="prev"></Step3>
     </keep-alive>
-
   </div>
 </template>
 
@@ -18,16 +17,6 @@ export default {
   data() {
     return {
       steps: 1,
-      userInfo: {
-        gender: null,
-        year: null,
-        month: null,
-        date: null,
-        q1: null,
-        q2: null,
-        q3: null,
-        text: null,
-      },
     };
   },
   components: {
@@ -36,16 +25,10 @@ export default {
     Step3,
   },
   methods: {
-    firstAddInfo(step1Info) {
-      Object.assign(this.userInfo, step1Info);
-      this.steps++;
-    },
-    secondAddInfo(step2Info) {
-      Object.assign(this.userInfo, step2Info);
-      this.steps++;
-    },
-    thirdAddInfo(step3Info) {
-      Object.assign(this.userInfo, step3Info);
+    next() {
+      if (this.steps < 3) {
+        this.steps++;
+      }
     },
     prev() {
       this.steps--;

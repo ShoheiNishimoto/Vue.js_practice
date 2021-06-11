@@ -6,7 +6,7 @@
     </div>
     <!-- 問1 -->
     <p>ご相談内容</p>
-    <textarea name="" id="" cols="30" rows="10" v-model="text"></textarea>
+    <textarea name="" id="" cols="30" rows="10" @input="inputText"></textarea>
 
     <div class="btnContainer">
       <button id="prev" @click="prev">前へ戻る</button>
@@ -20,19 +20,19 @@
 export default {
   data() {
     return {
-      text: '',
       blank: false,
     };
   },
   methods: {
+    inputText(e) {
+      this.$store.dispatch('inputText', e.target.value)
+    },
     next() {
       if (this.text == false) {
         this.blank = true;
         return;
       }
-      this.$emit('thirdNext', {
-        text: this.text,
-      });
+      this.$emit('next');
     },
     prev() {
       this.$emit('prev');

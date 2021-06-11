@@ -7,32 +7,46 @@
     <!-- 性別 -->
     <p>性別</p>
     <label for="male">
-      <input type="radio" value="male" id="male" v-model="gender" />
+      <input
+        type="radio"
+        name="gender"
+        value="male"
+        id="male"
+        @change="selectGender"
+      />
       男
     </label>
     <label for="female">
-      <input type="radio" value="female" id="female" v-model="gender" />
+      <input
+        type="radio"
+        name="gender"
+        value="female"
+        id="female"
+        @change="selectGender"
+      />
       女
     </label>
 
     <!-- 生年月日 -->
     <p>生年月日</p>
     <div>
-      <select name="yaer" v-model="year">
+      <select name="yaer" @change="selectYear">
         <option value="">-</option>
-        <option v-for="n in 100" :key="n" :value="2021 - (100 - n)">{{
-          2021 - (100 - n)
+        <option v-for="year in years" :key="year" :value="year">{{
+          year
         }}</option>
       </select>
       年
-      <select name="month" v-model="month">
+      <select name="month" @change="selectMonth">
         <option value="">-</option>
-        <option v-for="n in 12" :key="n" :value="n">{{ n }}</option>
+        <option v-for="month in months" :key="month" :value="month">{{
+          month
+        }}</option>
       </select>
       月
-      <select name="date" v-model="date">
+      <select name="date" @change="selectDate">
         <option value="">-</option>
-        <option v-for="n in 31" :key="n" :value="n">{{ n }}</option>
+        <option v-for="day in days" :key="day" :value="day">{{ day }}</option>
       </select>
       日
     </div>
@@ -43,33 +57,41 @@
 </template>
 
 <script>
+import { years, months, days } from '../helpers/definition.js';
 export default {
   data() {
     return {
-      gender: null,
-      year: null,
-      month: null,
-      date: null,
       blank: false,
+      years,
+      months,
+      days,
     };
   },
   methods: {
+    selectGender(e) {
+      this.$store.dispatch('selectGender', e.target.value);
+    },
+    selectYear(e) {
+      this.$store.dispatch('selectYear', e.target.value);
+    },
+    selectMonth(e) {
+      this.$store.dispatch('selectMonth', e.target.value);
+    },
+    selectDate(e) {
+      this.$store.dispatch('selectDate', e.target.value);
+    },
     next() {
       if (
-        this.gender === null ||
-        this.year === null ||
-        this.month === null ||
-        this.date === null
+        this.$store.state.userInfo.gender === null ||
+        this.$store.state.userInfo.year === null ||
+        this.$store.state.userInfo.month === null ||
+        this.$store.state.userInfo.date === null
       ) {
         this.blank = true;
         return;
+      } else {
+        this.$emit('next');
       }
-      this.$emit('firstNext', {
-        gender: this.gender,
-        year: this.year,
-        month: this.month,
-        date: this.date,
-      });
     },
   },
 };
