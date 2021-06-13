@@ -69,16 +69,6 @@ export default {
     next() {
       this.$emit('next');
     },
-    //   if (
-    //     this.$store.state.userInfo.q1 === null ||
-    //     this.$store.state.userInfo.q2 === null ||
-    //     this.$store.state.userInfo.q3 === null
-    //   ) {
-    //     this.blank = true;
-    //     return;
-    //   }
-    //   this.$emit('next');
-    // },
     prev() {
       this.$emit('prev');
     },
