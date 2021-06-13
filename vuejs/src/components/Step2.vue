@@ -67,7 +67,17 @@ export default {
       this.$store.dispatch('selectQ3', e.target.value);
     },
     next() {
-      this.$emit('next');
+      if (
+        this.$store.state.userInfo.q1 === null ||
+        this.$store.state.userInfo.q2 === null ||
+        this.$store.state.userInfo.q3 === null 
+      ) {
+        this.blank = true;
+        return;
+      } else {
+        this.blank = false;
+        this.$emit('next');
+      }
     },
     prev() {
       this.$emit('prev');

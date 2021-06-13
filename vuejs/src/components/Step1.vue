@@ -90,6 +90,7 @@ export default {
         this.blank = true;
         return;
       } else {
+        this.blank = false;
         this.$emit('next');
       }
     },
