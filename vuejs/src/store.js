@@ -35,6 +35,9 @@ export default new Vuex.Store({
     },
     getText(state) {
       return state.userInfo.text;
+    },
+    getUserObj(state) {
+      return state.userInfo;
     }
   },
   mutations: {

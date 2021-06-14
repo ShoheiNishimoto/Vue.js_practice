@@ -28,7 +28,7 @@ export default {
       this.$store.dispatch('inputText', e.target.value);
     },
     next() {
-      if (this.$store.state.userInfo.text === null) {
+      if (this.$store.getters.getUserObj.text === null) {
         this.blank = true;
         return;
       } else {

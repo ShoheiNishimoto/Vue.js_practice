@@ -27,7 +27,7 @@
     <h2>ご相談内容</h2>
     <p>{{ text }}</p>
 
-     <div class="btnContainer">
+    <div class="btnContainer">
       <button id="prev" @click="prev">前へ戻る</button>
       <button id="next" @click="sent">送信</button>
     </div>
@@ -43,7 +43,7 @@ export default {
     },
     sent() {
       alert('送信しました');
-    }
+    },
   },
   computed: {
     ...mapGetters({
@@ -52,7 +52,7 @@ export default {
       q1: 'getQ1',
       q2: 'getQ2',
       q3: 'getQ3',
-      text: 'getText'
+      text: 'getText',
     }),
   },
 };

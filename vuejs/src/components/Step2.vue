@@ -68,9 +68,9 @@ export default {
     },
     next() {
       if (
-        this.$store.state.userInfo.q1 === null ||
-        this.$store.state.userInfo.q2 === null ||
-        this.$store.state.userInfo.q3 === null 
+        this.$store.getters.getUserObj.q1 === null ||
+        this.$store.getters.getUserObj.q2 === null ||
+        this.$store.getters.getUserObj.q3 === null
       ) {
         this.blank = true;
         return;
