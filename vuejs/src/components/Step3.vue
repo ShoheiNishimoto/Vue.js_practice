@@ -25,14 +25,16 @@ export default {
   },
   methods: {
     inputText(e) {
-      this.$store.dispatch('inputText', e.target.value)
+      this.$store.dispatch('inputText', e.target.value);
     },
     next() {
-      if (this.text == false) {
+      if (this.$store.getters.getUserObj.text === null) {
         this.blank = true;
         return;
+      } else {
+        this.blank = false;
+        this.$emit('next');
       }
-      this.$emit('next');
     },
     prev() {
       this.$emit('prev');

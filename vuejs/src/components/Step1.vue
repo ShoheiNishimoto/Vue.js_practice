@@ -82,14 +82,15 @@ export default {
     },
     next() {
       if (
-        this.$store.state.userInfo.gender === null ||
-        this.$store.state.userInfo.year === null ||
-        this.$store.state.userInfo.month === null ||
-        this.$store.state.userInfo.date === null
+        this.$store.getters.getUserObj.gender === null ||
+        this.$store.getters.getUserObj.year === null ||
+        this.$store.getters.getUserObj.month === null ||
+        this.$store.getters.getUserObj.date === null
       ) {
         this.blank = true;
         return;
       } else {
+        this.blank = false;
         this.$emit('next');
       }
     },

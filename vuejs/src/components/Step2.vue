@@ -67,7 +67,17 @@ export default {
       this.$store.dispatch('selectQ3', e.target.value);
     },
     next() {
-      this.$emit('next');
+      if (
+        this.$store.getters.getUserObj.q1 === null ||
+        this.$store.getters.getUserObj.q2 === null ||
+        this.$store.getters.getUserObj.q3 === null
+      ) {
+        this.blank = true;
+        return;
+      } else {
+        this.blank = false;
+        this.$emit('next');
+      }
     },
     prev() {
       this.$emit('prev');

@@ -17,3 +17,10 @@ getOptions(1, 12, months);
 getOptions(1, 31, days);
 
 export {years, months, days};
+
+// yesとnoからはいといいえを返す関数
+const answer = function(answer) {
+  return answer === 'yes' ? 'はい' : 'いいえ';
+}
+
+export {answer};
