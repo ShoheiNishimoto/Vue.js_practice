@@ -1,28 +1,29 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <header><h1>ToDoリスト</h1></header>
+    <main>
+      <SwitchState />
+      <Add />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import SwitchState from './components/SwitchStatus.vue';
+import Add from './components/Add.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    SwitchState,
+    Add,
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.mainContainer {
+  width: 800px;
+  margin: 50px auto;
 }
 </style>
