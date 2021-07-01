@@ -9,6 +9,9 @@ export default new Vuex.Store({
     id: 0
   },
   getters: {
+    allTasks: function(state) {
+      return state.tasks;
+    },
     doneTasks: function(state) {
       return state.tasks.filter((task) => task.done);
     },
@@ -40,7 +43,8 @@ export default new Vuex.Store({
       commit('changeDone', id);
     },
     addTask({ commit }, val) {
-      commit('addTask', val);
+      commit('addTask', val.coment);
+      val.coment = '';
     },
     deleteTask({ commit }, id) {
       commit('deleteTask', id);

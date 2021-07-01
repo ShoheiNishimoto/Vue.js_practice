@@ -38,21 +38,21 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   data() {
     return {
-      disp: '0',
+      disp: 0,
     };
   },
   computed: {
-    ...mapGetters(['doneTasks', 'notDoneTasks']),
+    ...mapGetters(['allTasks', 'doneTasks', 'notDoneTasks']),
     tasks() {
-      switch (this.disp) {
-        case '0':
-          return this.$store.state.tasks;
-        case '1':
+      switch (Number(this.disp)) {
+        case 0:
+          return this.allTasks;
+        case 1:
           return this.notDoneTasks;
-        case '2':
+        case 2:
           return this.doneTasks;
         default:
-          return '';
+          return null;
       }
     },
     currStatus() {
@@ -66,7 +66,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['changeDone','deleteTask']),
+    ...mapActions(['changeDone', 'deleteTask']),
   },
 };
 </script>

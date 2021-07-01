@@ -2,8 +2,8 @@
   <div>
     <h2>新規タスクの追加</h2>
     <div class="addTaskArea">
-      <input type="text" v-model="val"/>
-      <button class="btn" @click="addTask(val); clearText()">追加</button>
+      <input type="text" v-model="val.coment"/>
+      <button class="btn" @click="addTask(val)">追加</button>
     </div>
   </div>
 </template>
@@ -13,14 +13,13 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      val: '',
+      val: {
+        coment: '',
+      },
     }
   },
   methods: {
     ...mapActions(['addTask']),
-    clearText() {
-      this.val = '';
-    }
   },
 };
 </script>

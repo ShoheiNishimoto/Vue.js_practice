@@ -3,20 +3,20 @@
     <header><h1>ToDoリスト</h1></header>
     <main>
       <SwitchState />
-      <Add />
+      <AddTask />
     </main>
   </div>
 </template>
 
 <script>
 import SwitchState from './components/SwitchStatus.vue';
-import Add from './components/Add.vue';
+import AddTask from './components/AddTask.vue';
 
 export default {
   name: 'App',
   components: {
     SwitchState,
-    Add,
+    AddTask,
   },
 };
 </script>
