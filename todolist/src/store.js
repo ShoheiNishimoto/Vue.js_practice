@@ -9,22 +9,22 @@ export default new Vuex.Store({
     id: 0
   },
   getters: {
-    allTasks: function(state) {
+    allTasks(state) {
       return state.tasks;
     },
-    doneTasks: function(state) {
+    doneTasks(state) {
       return state.tasks.filter((task) => task.done);
     },
-    notDoneTasks: function(state) {
+    notDoneTasks(state) {
       return state.tasks.filter((task) => !task.done);
     },
   },
   mutations: {
-    changeDone: function(state, id) {
+    changeDone(state, id) {
       const index = state.tasks.findIndex((task) => task.id === id);
       state.tasks[index].done = !state.tasks[index].done;
     },
-    addTask: function(state, val) {
+    addTask(state, val) {
       const id = state.id;
       state.id ++;
       state.tasks.push({
@@ -33,7 +33,7 @@ export default new Vuex.Store({
         done: false,
       });
     },
-    deleteTask: function(state, id) {
+    deleteTask(state, id) {
       const index = state.tasks.findIndex((task) => task.id === id);
       state.tasks.splice(index, 1);
     },
