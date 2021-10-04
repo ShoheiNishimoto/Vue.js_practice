@@ -30,9 +30,6 @@ export default {
         password: this.password,
       });
     },
-    updata() {
-      this.$store.dispatch("updata", this.name);
-    },
   },
 };
 </script>

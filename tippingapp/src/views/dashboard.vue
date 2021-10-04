@@ -3,6 +3,7 @@
     <div class="header">
       <h2>{{ user.name }} さんようこそ</h2>
       <h3>残高:{{ myBalance }}</h3>
+      <button @click="logout">ログアウト</button>
     </div>
     <h2 class="title">ユーザ一覧</h2>
     <div class="userList">
@@ -14,7 +15,9 @@
           <button class="userList__user-walletBtn" @click="switchWalletModal">
             Walletを見る
           </button>
-          <button class="userList__user-sentBtn" @click="switchSentModal">送る</button>
+          <button class="userList__user-sentBtn " @click="switchSentModal">
+            送る
+          </button>
         </div>
       </div>
       <!-- ------------- -->
@@ -27,34 +30,50 @@
 </template>
 
 <script>
+import firebase from 'firebase';
 import ModalWallet from "../components/modal-wallet.vue";
 import ModalSent from "../components/modal-sent.vue";
 import { mapGetters } from "vuex";
 import { mapMutations } from "vuex";
 export default {
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     ModalWallet,
     ModalSent,
   },
   computed: {
-    ...mapGetters(['getCurrentWalletModal', 'getCurrentSentModal']),
+    ...mapGetters(["getCurrentWalletModal", "getCurrentSentModal"]),
     user() {
       return this.$store.getters.getCurrentUser;
     },
     myBalance() {
       return this.$store.getters.getMyBalance;
-    }
+    },
   },
   methods: {
     ...mapMutations(["switchWalletModal", "switchSentModal"]),
+    logout() {
+      this.$store.dispatch('logout');
+    }
   },
   created() {
-    this.$store.dispatch('setDashBoard');
-  }
+    firebase.auth().onAuthStateChanged((user) => {
+      if(user) {
+        const currentUser = user;
+        this.$store.commit('updateUser', {
+          uid: currentUser.uid,
+          email: currentUser.email,
+          name: currentUser.displayName
+        })
+        this.$store.dispatch("setMyBalance");
+        this.$store.dispatch("fetchMyBalance");
+      }else {
+        console.log('user is not exist');
+      }
+    })
+  },
 };
 </script>
 
@@ -66,6 +85,7 @@ export default {
 }
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
 }
 .title {

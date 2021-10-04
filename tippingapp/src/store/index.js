@@ -43,6 +43,13 @@ export default new Vuex.Store({
     updateMyBalance(state, myBalance) {
       state.myBalance = myBalance;
     },
+    deleteLoginUser(state) {
+      state.user.uid = "";
+      state.user.email = "";
+      state.user.name = "";
+      state.myBalance = null;
+      router.push("/login");
+    },
   },
   actions: {
     registerNewUser({ dispatch }, payload) {
@@ -51,7 +58,7 @@ export default new Vuex.Store({
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then((userCredential) => {
           console.log(userCredential);
-          dispatch("update", payload.name);
+          dispatch("updateName", payload.name);
         })
         .catch((error) => {
           // var errorCode = error.code;
@@ -60,7 +67,7 @@ export default new Vuex.Store({
           // ..
         });
     },
-    login({ dispatch }, payload) {
+    login(context, payload) {
       firebase
         .auth()
         .signInWithEmailAndPassword(payload.email, payload.password)
@@ -68,34 +75,23 @@ export default new Vuex.Store({
           console.log(userCredential);
           //  dashboard へのページ遷移
           router.push("/dashboard");
-          dispatch("checkLoginUser");
         })
         .catch((error) => {
           alert(error);
         });
     },
-    checkLoginUser({ commit }) {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          commit("updateUser", {
-            uid: user.uid,
-            email: user.email,
-            name: user.displayName,
-          });
-        } else {
-          router.push("/login");
-        }
-      });
+    logout({ commit }) {
+      firebase.auth().signOut();
+      commit('deleteLoginUser')
     },
-    //---------------------------------------
     //ユーザーの残高を設定する仮のアクション
     setMyBalance({ getters }) {
       const db = firebase.firestore();
       const user = getters.getCurrentUser;
-      db.collection(`user/${user.uid}`)
+      db.collection(`user/${user.uid}/userdata`)
         .doc("balance")
         .set({
-          userBalance: 500,
+          userBalance: 899,
         })
         .catch((error) => {
           console.log("Error writing document: ", error);
@@ -106,8 +102,7 @@ export default new Vuex.Store({
     fetchMyBalance({ getters, commit }) {
       const db = firebase.firestore();
       const user = getters.getCurrentUser;
-      const docRef = db.collection(`user/${user.uid}`).doc("balance");
-
+      const docRef = db.collection(`user/${user.uid}/userdata`).doc("balance");
       docRef
         .get()
         .then((doc) => {
@@ -120,23 +115,18 @@ export default new Vuex.Store({
         });
     },
 
-    update(context, name) {
+    updateName(context, name) {
       firebase
         .auth()
         .currentUser.updateProfile({
           displayName: name,
         })
         .then(() => {
-          console.log("updata successful");
+          console.log("updataName successful");
         })
         .catch((error) => {
           console.log(error);
         });
-    },
-    setDashBoard({ dispatch }) {
-      dispatch("checkLoginUser");
-      dispatch("setMyBalance"); //仮のアクション
-      dispatch("fetchMyBalance");
     },
     moneyTransfer() {
       //仮のアクション
